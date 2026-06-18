@@ -9,9 +9,9 @@ build/
 # IDE
 .idea/
 
-# Node (legacy scaffold)
+# Node (legacy scaffold at repo root)
 node_modules/
-package-lock.json
+/package-lock.json
 
 # Env
 .env
