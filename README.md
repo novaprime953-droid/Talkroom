@@ -1,128 +1,95 @@
 # Talk Room
 
-**Talk Room** is a professional voice chat room app built with Flutter. It combines voice room hosting, VIP/SVIP entry effects, gift animations, avatar frames, PK battles, and lucky gift jackpots — with an original deep navy / teal / gold glass-morphism design.
+Flutter voice chat app + Next.js backend/admin for Vercel.
 
-## Features
+## Repo structure
 
-- **Home** — Featured live rooms and discovery grid
-- **Explore** — Category filters and PK Battle arena
-- **Messages** — Conversation inbox
-- **Profile** — VIP tiers, avatar frames, wallet
-- **Voice Room** — Mic seat grid, live chat, gift panel, SVIP entry banner
-- **PK Battle** — VS screen with score bar, timer, supporters
-- **Gifts** — Categories (Popular, Luxury, Lucky, SVIP) with Lottie + SVGA animations
-- **Lucky Gifts** — Jackpot overlay with multiplier effects
-
-## Assets
-
-Bundled assets are sourced from extracted reference APKs for development/demo:
-
-- **Lottie** — `assets/lottie/` (from Chatna extracted assets)
-- **SVGA** — `assets/svga/` (SVIP entry + gift animations from NiuChat)
-
-## Prerequisites
-
-- Flutter SDK (tested with 3.41.1)
-- Android Studio / Android SDK (for APK build)
-- Git safe directory for Flutter (if ownership warning appears)
-
-### Flutter PATH (Windows)
-
-```powershell
-$env:PATH = "D:\flutter_windows_3.41.1-stable\flutter\bin;" + $env:PATH
+```
+TalkRoom/
+├── lib/                 # Flutter mobile app
+├── platform/            # Next.js API + admin + web panels (deploy to Vercel)
+├── assets/              # Lottie + SVGA animations
+└── android/ / ios/
 ```
 
-### Git ownership workaround (without global config)
+## 1. Push to GitHub
+
+Repo: https://github.com/novaprime953-droid/Talkroom.git
+
+If push fails with "Repository not found", create the empty repo on GitHub first, then:
 
 ```powershell
-$env:GIT_CONFIG_COUNT = "1"
-$env:GIT_CONFIG_KEY_0 = "safe.directory"
-$env:GIT_CONFIG_VALUE_0 = "D:/flutter_windows_3.41.1-stable/flutter"
+cd D:\APKs\TalkRoom
+git add -A
+git commit -m "Add platform backend, admin panels, and API integration"
+git push -u origin main
 ```
 
-## Setup
+Use GitHub Desktop, PAT, or SSH if authentication is required.
+
+## 2. Deploy backend on Vercel
+
+1. Import `novaprime953-droid/Talkroom` in Vercel
+2. Set **Root Directory** to `platform`
+3. Framework: Next.js (auto-detected)
+4. Deploy
+
+Your live URL will be like `https://talkroom-xxxx.vercel.app`
+
+### After deploy — test API
+
+- `https://YOUR-URL.vercel.app/api/config`
+- `https://YOUR-URL.vercel.app/admin` — admin panel
+- `https://YOUR-URL.vercel.app/panels/wallet` — wallet web panel
+
+## 3. Connect Flutter app to your Vercel URL
 
 ```powershell
 cd D:\APKs\TalkRoom
 $env:PATH = "D:\flutter_windows_3.41.1-stable\flutter\bin;" + $env:PATH
-$env:GIT_CONFIG_COUNT = "1"
-$env:GIT_CONFIG_KEY_0 = "safe.directory"
-$env:GIT_CONFIG_VALUE_0 = "D:/flutter_windows_3.41.1-stable/flutter"
 flutter pub get
+flutter run --dart-define=API_BASE_URL=https://YOUR-URL.vercel.app
 ```
 
-## Run
+With API URL set:
+- Home loads rooms from `/api/rooms`
+- Profile opens web panels (wallet, tasks, help) in browser
+- Gifts/messages can use same backend
+
+Without API URL, app uses local mock data.
+
+## 4. Build APK
+
+Requires valid JDK 17 (`JAVA_HOME`).
+
+```powershell
+flutter build apk --release --dart-define=API_BASE_URL=https://YOUR-URL.vercel.app
+```
+
+## Platform features
+
+| Route | Purpose |
+|-------|---------|
+| `/api/config` | App config + panel URLs for Flutter |
+| `/api/rooms` | Voice rooms |
+| `/api/gifts` | Gift catalog |
+| `/api/users` | Users |
+| `/api/messages` | Chat messages |
+| `/api/pk` | PK battles |
+| `/admin` | Admin dashboard |
+| `/panels/wallet` | Recharge (WebView) |
+| `/panels/events` | Events center |
+| `/panels/tasks` | Task center |
+| `/panels/rank` | Leaderboards |
+| `/panels/agency` | Agency center |
+| `/panels/help` | Support |
+
+## Flutter run (local mock)
 
 ```powershell
 flutter run
 ```
 
-For a specific device:
-
-```powershell
-flutter devices
-flutter run -d <device_id>
-```
-
-Web preview:
-
-```powershell
-flutter run -d chrome
-```
-
-## Build APK
-
-```powershell
-flutter build apk --release
-```
-
-Output: `build\app\outputs\flutter-apk\app-release.apk`
-
-Split per ABI (smaller files):
-
-```powershell
-flutter build apk --split-per-abi
-```
-
-## Analyze
-
-```powershell
-flutter analyze
-```
-
-## Project Structure
-
-```
-TalkRoom/
-├── assets/
-│   ├── lottie/          # Lottie animations (gifts, PK, mic, etc.)
-│   └── svga/            # SVIP entry + gift SVGA files
-├── lib/
-│   ├── main.dart
-│   ├── data/mock_data.dart
-│   ├── models/          # User, Room, Gift, ChatMessage
-│   ├── screens/         # Home, Explore, Messages, Profile, VoiceRoom, PK
-│   ├── theme/           # Colors + Theme
-│   └── widgets/         # Glass UI, gifts, avatar frames, chat
-├── android/
-├── ios/
-└── pubspec.yaml
-```
-
-## Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `google_fonts` | Plus Jakarta Sans typography |
-| `lottie` | Gift & UI animations |
-| Custom `SvgaAnimation` | SVIP entry + SVGA gift motion (fallback; `.svga` files bundled for future native player) |
-
-## Notes
-
-- All room data is **mock/demo** — no backend required to run the UI.
-- Replace mock data in `lib/data/mock_data.dart` with your API when ready.
-- Ensure you have rights to use bundled animation assets in production.
-
 ## License
 
-See LICENSE file.
+See LICENSE.

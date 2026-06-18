@@ -1,18 +1,49 @@
 import 'package:flutter/material.dart';
+
+import '../config/api_config.dart';
 import '../data/mock_data.dart';
 import '../models/room.dart';
+import '../services/api_service.dart';
 import '../theme/app_colors.dart';
 import '../widgets/glass_container.dart';
 import '../widgets/room_card.dart';
 import 'voice_room_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _api = ApiService();
+  List<VoiceRoom> _rooms = MockData.rooms;
+  bool _loading = ApiConfig.useRemoteApi;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadRooms();
+  }
+
+  Future<void> _loadRooms() async {
+    if (!ApiConfig.useRemoteApi) return;
+    final remote = await _api.fetchRooms();
+    if (remote.isNotEmpty && mounted) {
+      setState(() {
+        _rooms = remote;
+        _loading = false;
+      });
+    } else if (mounted) {
+      setState(() => _loading = false);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final featured = MockData.rooms.first;
-    final others = MockData.rooms.skip(1).toList();
+    final featured = _rooms.first;
+    final others = _rooms.length > 1 ? _rooms.skip(1).toList() : <VoiceRoom>[];
 
     return Container(
       decoration: BoxDecoration(
@@ -46,13 +77,21 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Text(
-                          'Live voice rooms near you',
-                          style: TextStyle(color: AppColors.textSecondary, fontSize: 13),
+                        Text(
+                          ApiConfig.useRemoteApi
+                              ? 'Connected to cloud'
+                              : 'Live voice rooms near you',
+                          style: const TextStyle(color: AppColors.textSecondary, fontSize: 13),
                         ),
                       ],
                     ),
                     const Spacer(),
+                    if (_loading)
+                      const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
                     GlassContainer(
                       padding: const EdgeInsets.all(10),
                       borderRadius: 14,

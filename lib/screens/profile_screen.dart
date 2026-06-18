@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/mock_data.dart';
 import '../models/user.dart';
+import '../services/web_panel_launcher.dart';
 import '../theme/app_colors.dart';
 import '../widgets/avatar_frame.dart';
 import '../widgets/glass_container.dart';
@@ -82,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildWalletCard(user.coins),
+              _buildWalletCard(context, user.coins),
               const SizedBox(height: 20),
               const Align(
                 alignment: Alignment.centerLeft,
@@ -129,10 +130,10 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildMenuItem(Icons.diamond_outlined, 'VIP Center', 'Unlock exclusive perks'),
-              _buildMenuItem(Icons.card_giftcard_outlined, 'Gift History', 'View sent & received'),
-              _buildMenuItem(Icons.emoji_events_outlined, 'Achievements', '12 badges earned'),
-              _buildMenuItem(Icons.help_outline_rounded, 'Help & Support', 'FAQ and contact'),
+              _buildMenuItem(context, Icons.diamond_outlined, 'VIP Center', 'Unlock exclusive perks', '/panels/events'),
+              _buildMenuItem(context, Icons.card_giftcard_outlined, 'Gift History', 'View sent & received', '/panels/rank'),
+              _buildMenuItem(context, Icons.emoji_events_outlined, 'Task Center', 'Daily rewards', '/panels/tasks'),
+              _buildMenuItem(context, Icons.help_outline_rounded, 'Help & Support', 'FAQ and contact', '/panels/help'),
             ],
           ),
         ),
@@ -140,7 +141,7 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWalletCard(int coins) {
+  Widget _buildWalletCard(BuildContext context, int coins) {
     return GlassContainer(
       padding: const EdgeInsets.all(20),
       borderRadius: 20,
@@ -168,7 +169,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => WebPanelLauncher.open(context, '/panels/wallet'),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.teal500,
               foregroundColor: AppColors.navy900,
@@ -181,10 +182,12 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(IconData icon, String title, String subtitle) {
+  Widget _buildMenuItem(BuildContext context, IconData icon, String title, String subtitle, String panelPath) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: GlassContainer(
+      child: GestureDetector(
+        onTap: () => WebPanelLauncher.open(context, panelPath),
+        child: GlassContainer(
         padding: const EdgeInsets.all(16),
         borderRadius: 16,
         child: Row(
@@ -202,6 +205,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
           ],
+        ),
         ),
       ),
     );
