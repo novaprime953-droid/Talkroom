@@ -158,7 +158,7 @@ export const gifts: GiftItem[] = [
   { id: "g7", name: "Lucky Jackpot", emoji: "🎰", price: 500, category: "lucky", isLucky: true, multiplier: 100, svgaAsset: "assets/svga/yogo_lucky_gift_100.svga" },
   { id: "g8", name: "Super Gift I", emoji: "🔥", price: 5000, category: "svip", svgaAsset: "assets/svga/yogo_super_gift_1.svga" },
   { id: "g9", name: "Super Gift II", emoji: "⚡", price: 10000, category: "svip", svgaAsset: "assets/svga/yogo_super_gift_2.svga" },
-  { id: "g10", name: "Super Gift III", emoji: "🌟", price: 20000, category: "svip", svgaAsset: "assets/svga/yogo_super_gift_3.svga" },
+  { id: "g11", name: "PK Victory", emoji: "⚔️", price: 3000, category: "svip", svgaAsset: "assets/svga/yogo_cross_pk.svga" },
 ];
 
 export const micUsers: User[] = [
@@ -232,6 +232,8 @@ export function getAppConfig(baseUrl: string) {
     apiBaseUrl: baseUrl,
     appName: "Talk Room",
     version: "1.0.0",
+    exploreCategories,
+    vipTiers,
     features: {
       voiceRooms: true,
       gifts: true,

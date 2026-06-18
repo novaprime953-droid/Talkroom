@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mock_data.dart';
+import '../services/app_repository.dart';
 import '../theme/app_colors.dart';
 import '../widgets/glass_container.dart';
 import '../widgets/room_card.dart';
@@ -18,6 +18,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final repo = AppRepository.instance;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -44,13 +45,13 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  itemCount: MockData.exploreCategories.length,
+                  itemCount: repo.exploreCategories.length,
                   itemBuilder: (context, index) {
                     final selected = _selectedCategory == index;
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),
                       child: FilterChip(
-                        label: Text(MockData.exploreCategories[index]),
+                        label: Text(repo.exploreCategories[index]),
                         selected: selected,
                         onSelected: (_) => setState(() => _selectedCategory = index),
                         selectedColor: AppColors.teal500,
@@ -125,7 +126,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    final room = MockData.rooms[index];
+                    final room = repo.rooms[index];
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 14),
                       child: RoomCard(
@@ -136,7 +137,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       ),
                     );
                   },
-                  childCount: MockData.rooms.length,
+                  childCount: repo.rooms.length,
                 ),
               ),
             ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'services/app_repository.dart';
 import 'theme/app_theme.dart';
 import 'screens/main_shell.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -13,6 +14,7 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
+  await AppRepository.instance.load();
   runApp(const TalkRoomApp());
 }
 
@@ -21,11 +23,14 @@ class TalkRoomApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Talk Room',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      home: const MainShell(),
+    return ListenableBuilder(
+      listenable: AppRepository.instance,
+      builder: (context, _) => MaterialApp(
+        title: 'Talk Room',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.darkTheme,
+        home: const MainShell(),
+      ),
     );
   }
 }

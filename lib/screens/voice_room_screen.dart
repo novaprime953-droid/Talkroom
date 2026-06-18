@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../data/mock_data.dart';
+import '../services/app_repository.dart';
 import '../models/chat_message.dart';
 import '../models/gift.dart';
 import '../models/room.dart';
@@ -35,14 +35,14 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
   @override
   void initState() {
     super.initState();
-    _messages = List.from(MockData.roomMessages);
+    _messages = List.from(AppRepository.instance.roomMessages);
     Future.delayed(const Duration(seconds: 5), () {
       if (mounted) setState(() => _showEntryBanner = false);
     });
   }
 
   List<AppUser?> get _seats {
-    final users = MockData.micUsers.skip(1).toList();
+    final users = AppRepository.instance.micUsers.skip(1).toList();
     return List<AppUser?>.generate(8, (i) => i < users.length ? users[i] : null);
   }
 
@@ -54,11 +54,11 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
       _messages.add(
         ChatMessage(
           id: 'c${_messages.length}',
-          userName: MockData.currentUser.name,
-          content: 'sent ${gift.name} to ${MockData.micUsers.first.name}',
+          userName: AppRepository.instance.currentUser.name,
+          content: 'sent ${gift.name} to ${AppRepository.instance.micUsers.first.name}',
           type: ChatMessageType.gift,
           timestamp: DateTime.now(),
-          vipTier: MockData.currentUser.vipTier,
+          vipTier: AppRepository.instance.currentUser.vipTier,
           giftEmoji: gift.emoji,
         ),
       );
@@ -105,7 +105,7 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
                         children: [
                           const SizedBox(height: 8),
                           MicSeatGrid(
-                            host: MockData.micUsers.first,
+                            host: AppRepository.instance.micUsers.first,
                             seats: _seats,
                             onSeatTap: (_) {},
                           ),
@@ -132,8 +132,8 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
               left: 0,
               right: 0,
               child: VipEntryBanner(
-                user: MockData.currentUser,
-                svgaAsset: MockData.svipEntryAsset(MockData.currentUser.vipTier),
+                user: AppRepository.instance.currentUser,
+                svgaAsset: AppRepository.instance.svipEntryAsset(AppRepository.instance.currentUser.vipTier),
                 onComplete: () => setState(() => _showEntryBanner = false),
               ),
             ),
@@ -143,8 +143,8 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
               right: 0,
               bottom: 0,
               child: GiftPanel(
-                gifts: MockData.gifts,
-                coins: MockData.currentUser.coins,
+                gifts: AppRepository.instance.gifts,
+                coins: AppRepository.instance.currentUser.coins,
                 onSend: _sendGift,
                 onClose: () => setState(() => _showGiftPanel = false),
               ),
@@ -152,7 +152,7 @@ class _VoiceRoomScreenState extends State<VoiceRoomScreen> {
           if (_showGiftOverlay && _activeGift != null)
             GiftSendOverlay(
               gift: _activeGift!,
-              senderName: MockData.currentUser.name,
+              senderName: AppRepository.instance.currentUser.name,
               onComplete: () {
                 if (!_activeGift!.isLucky) {
                   setState(() => _showGiftOverlay = false);

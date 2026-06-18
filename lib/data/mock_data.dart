@@ -173,6 +173,14 @@ class MockData {
       category: GiftCategory.svip,
       svgaAsset: 'assets/svga/yogo_super_gift_3.svga',
     ),
+    GiftItem(
+      id: 'g11',
+      name: 'PK Victory',
+      emoji: '⚔️',
+      price: 3000,
+      category: GiftCategory.svip,
+      svgaAsset: 'assets/svga/yogo_cross_pk.svga',
+    ),
   ];
 
   static const micUsers = [

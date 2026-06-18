@@ -1,11 +1,8 @@
-/// API base URL for Talk Room backend (Vercel deployment).
-///
-/// Set when building/running:
-/// `flutter run --dart-define=API_BASE_URL=https://your-vercel-url.vercel.app`
+/// Production backend on Vercel.
 class ApiConfig {
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: '',
+    defaultValue: 'https://talkroom-qvwu.vercel.app',
   );
 
   static bool get useRemoteApi => baseUrl.isNotEmpty;

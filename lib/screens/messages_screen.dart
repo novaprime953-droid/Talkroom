@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mock_data.dart';
+import '../services/app_repository.dart';
 import '../theme/app_colors.dart';
 import '../widgets/glass_container.dart';
 
@@ -8,6 +8,7 @@ class MessagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final conversations = AppRepository.instance.conversations;
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -30,10 +31,10 @@ class MessagesScreen extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 100),
-                itemCount: MockData.conversations.length,
+                itemCount: conversations.length,
                 separatorBuilder: (context, index) => const SizedBox(height: 10),
                 itemBuilder: (context, index) {
-                  final conv = MockData.conversations[index];
+                  final conv = conversations[index];
                   return GlassContainer(
                     onTap: () {},
                     padding: const EdgeInsets.all(14),

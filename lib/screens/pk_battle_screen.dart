@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../data/mock_data.dart';
+import '../services/app_repository.dart';
 import '../models/user.dart';
 import '../theme/app_colors.dart';
 import '../widgets/avatar_frame.dart';
@@ -71,7 +71,7 @@ class _PkBattleScreenState extends State<PkBattleScreen>
                       const SizedBox(height: 24),
                       Row(
                         children: [
-                          Expanded(child: _buildFighter(MockData.micUsers[0], true)),
+                          Expanded(child: _buildFighter(AppRepository.instance.micUsers[0], true)),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12),
                             child: ScaleTransition(
@@ -99,7 +99,7 @@ class _PkBattleScreenState extends State<PkBattleScreen>
                               ),
                             ),
                           ),
-                          Expanded(child: _buildFighter(MockData.micUsers[2], false)),
+                          Expanded(child: _buildFighter(AppRepository.instance.micUsers[2], false)),
                         ],
                       ),
                       const SizedBox(height: 24),
@@ -239,7 +239,7 @@ class _PkBattleScreenState extends State<PkBattleScreen>
         children: [
           const Text('Top Supporters', style: TextStyle(fontWeight: FontWeight.w800)),
           const SizedBox(height: 12),
-          ...MockData.micUsers.take(3).map(
+          ...AppRepository.instance.micUsers.take(3).map(
             (u) => Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(

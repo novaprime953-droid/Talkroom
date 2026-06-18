@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mock_data.dart';
+import '../services/app_repository.dart';
 import '../models/user.dart';
 import '../services/web_panel_launcher.dart';
 import '../theme/app_colors.dart';
@@ -11,7 +11,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = MockData.currentUser;
+    final user = AppRepository.instance.currentUser;
 
     return Container(
       decoration: BoxDecoration(
