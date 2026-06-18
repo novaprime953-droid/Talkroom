@@ -1,0 +1,25 @@
+# Flutter build artifacts
+.dart_tool/
+.flutter-plugins-dependencies
+build/
+android/.gradle/
+ios/Pods/
+
+# Next.js
+.next/
+out/
+node_modules/
+
+# IDE
+.idea/
+*.iml
+
+# Env
+.env
+.env.local
+
+# OS
+.DS_Store
+
+# Legacy root lock (use root package-lock for Vercel)
+/platform/node_modules/

@@ -9,9 +9,10 @@ build/
 # IDE
 .idea/
 
-# Node (legacy scaffold at repo root)
+# Next.js / Vercel (root)
+.next/
+out/
 node_modules/
-/package-lock.json
 
 # Env
 .env

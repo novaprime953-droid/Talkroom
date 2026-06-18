@@ -11,4 +11,6 @@ class ApiConfig {
     final normalized = path.startsWith('/') ? path : '/$path';
     return '$baseUrl$normalized';
   }
+
+  static String panelUrl(String path) => endpoint(path);
 }
