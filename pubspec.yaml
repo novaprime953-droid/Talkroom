@@ -1,0 +1,39 @@
+name: talk_room
+description: Talk Room - Professional voice chat rooms with VIP, gifts, and PK battles.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.2.1
+  lottie: ^3.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/lottie/
+    - assets/lottie/gift/diamond/
+    - assets/lottie/gift/marquee/
+    - assets/lottie/match/
+    - assets/lottie/match/ball/
+    - assets/lottie/mic/
+    - assets/lottie/loading/
+    - assets/lottie/refresh/
+    - assets/lottie/connect/
+    - assets/lottie/dialog/
+    - assets/lottie/bomb/
+    - assets/lottie/gameresult/
+    - assets/lottie/game_result_like/
+    - assets/lottie/farm_sign_tips/
+    - assets/lottie/soundeffect/
+    - assets/svga/
