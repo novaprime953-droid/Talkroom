@@ -25,6 +25,10 @@ class AppColors {
 
   static const glassFill = Color(0x1AFFFFFF);
   static const glassBorder = Color(0x33FFFFFF);
+  static const glassLight = Color(0x1AFFFFFF);
+  static const glassDark = Color(0x0DFFFFFF);
+  static const borderLight = Color(0x33FFFFFF);
+  static const accentLight = Color(0x2DFFFFFF);
 
   static const vipBronze = Color(0xFFCD7F32);
   static const vipSilver = Color(0xFFC0C0C0);
@@ -34,10 +38,10 @@ class AppColors {
   static const svipCrimson = Color(0xFFDC2626);
 
   static List<Color> get backgroundGradient => [
-        navy900,
-        const Color(0xFF0F172A),
-        navy700,
-      ];
+    navy900,
+    const Color(0xFF0F172A),
+    navy700,
+  ];
 
   static List<Color> get accentGradient => [teal500, teal400, gold400];
 

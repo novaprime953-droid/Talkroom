@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@drawable/shape_capsule_enter_pwd_bg" android:padding="30.0dip" android:layout_width="300.0dip" android:layout_height="233.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#ff040b18" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/input_room_password" />
+    <EditText android:textSize="14.0sp" android:textColorHint="#ff999999" android:gravity="center" android:id="@id/et_room_pwd" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="60.0dip" android:layout_marginTop="20.0dip" android:layout_marginBottom="20.0dip" android:hint="@string/please_enter_a_1_6_password" android:inputType="number" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textColor="@color/color_222222" android:gravity="center" android:id="@id/tv_cancel" android:background="@drawable/shape_commom_tip_cancel_bg" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="@string/cancel_str" android:layout_weight="1.0" android:layout_marginEnd="10.0dip" />
+        <TextView android:textColor="@color/white" android:gravity="center" android:id="@id/tv_confirm" android:background="@drawable/shape_main_color_r_10" android:layout_width="0.0dip" android:layout_height="40.0dip" android:text="@string/sure_str" android:layout_weight="1.0" android:layout_marginStart="10.0dip" />
+    </LinearLayout>
+</LinearLayout>

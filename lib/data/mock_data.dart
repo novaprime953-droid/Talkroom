@@ -127,7 +127,7 @@ class MockData {
       category: GiftCategory.lucky,
       isLucky: true,
       multiplier: 10,
-      svgaAsset: 'assets/svga/yogo_lucky_gift_10.svga',
+      svgaAsset: 'assets/svga/gifts/lucky/yogo_lucky_gift_10.svga',
     ),
     GiftItem(
       id: 'g6',
@@ -137,7 +137,7 @@ class MockData {
       category: GiftCategory.lucky,
       isLucky: true,
       multiplier: 50,
-      svgaAsset: 'assets/svga/yogo_lucky_gift_50.svga',
+      svgaAsset: 'assets/svga/gifts/lucky/yogo_lucky_gift_50.svga',
     ),
     GiftItem(
       id: 'g7',
@@ -147,7 +147,7 @@ class MockData {
       category: GiftCategory.lucky,
       isLucky: true,
       multiplier: 100,
-      svgaAsset: 'assets/svga/yogo_lucky_gift_100.svga',
+      svgaAsset: 'assets/svga/gifts/lucky/yogo_lucky_gift_100.svga',
     ),
     GiftItem(
       id: 'g8',
@@ -155,7 +155,7 @@ class MockData {
       emoji: '🔥',
       price: 5000,
       category: GiftCategory.svip,
-      svgaAsset: 'assets/svga/yogo_super_gift_1.svga',
+      svgaAsset: 'assets/svga/gifts/super/yogo_super_gift_1.svga',
     ),
     GiftItem(
       id: 'g9',
@@ -163,7 +163,7 @@ class MockData {
       emoji: '⚡',
       price: 10000,
       category: GiftCategory.svip,
-      svgaAsset: 'assets/svga/yogo_super_gift_2.svga',
+      svgaAsset: 'assets/svga/gifts/super/yogo_super_gift_2.svga',
     ),
     GiftItem(
       id: 'g10',
@@ -171,7 +171,7 @@ class MockData {
       emoji: '🌟',
       price: 20000,
       category: GiftCategory.svip,
-      svgaAsset: 'assets/svga/yogo_super_gift_3.svga',
+      svgaAsset: 'assets/svga/gifts/super/yogo_super_gift_3.svga',
     ),
     GiftItem(
       id: 'g11',
@@ -179,7 +179,7 @@ class MockData {
       emoji: '⚔️',
       price: 3000,
       category: GiftCategory.svip,
-      svgaAsset: 'assets/svga/yogo_cross_pk.svga',
+      svgaAsset: 'assets/svga/room_animations/yogo_cross_pk.svga',
     ),
   ];
 
@@ -266,6 +266,6 @@ class MockData {
 
   static String svipEntryAsset(int tier) {
     final clamped = tier.clamp(1, 6);
-    return 'assets/svga/yogo_svip_enter_$clamped.svga';
+    return 'assets/svga/entries/svip_enter_$clamped/animation.svga';
   }
 }

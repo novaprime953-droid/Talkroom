@@ -5,6 +5,9 @@ import '../services/web_panel_launcher.dart';
 import '../theme/app_colors.dart';
 import '../widgets/avatar_frame.dart';
 import '../widgets/glass_container.dart';
+import 'store_screen.dart';
+import 'vip_system_screen.dart';
+import 'enhanced_pk_battle_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -130,10 +133,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildMenuItem(context, Icons.diamond_outlined, 'VIP Center', 'Unlock exclusive perks', '/panels/events'),
-              _buildMenuItem(context, Icons.card_giftcard_outlined, 'Gift History', 'View sent & received', '/panels/rank'),
-              _buildMenuItem(context, Icons.emoji_events_outlined, 'Task Center', 'Daily rewards', '/panels/tasks'),
-              _buildMenuItem(context, Icons.help_outline_rounded, 'Help & Support', 'FAQ and contact', '/panels/help'),
+              _buildMenuItem(context, Icons.diamond_outlined, 'VIP Center', 'Unlock exclusive perks', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VipSystemScreen()))),
+              _buildMenuItem(context, Icons.shopping_bag_outlined, 'Store', 'Buy coins & items', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const StoreScreen()))),
+              _buildMenuItem(context, Icons.flash_on_outlined, 'PK Arena', 'Battle & compete', onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const EnhancedPkBattleScreen()))),
+              _buildMenuItem(context, Icons.card_giftcard_outlined, 'Gift History', 'View sent & received', panelPath: '/panels/rank'),
+              _buildMenuItem(context, Icons.emoji_events_outlined, 'Task Center', 'Daily rewards', panelPath: '/panels/tasks'),
+              _buildMenuItem(context, Icons.help_outline_rounded, 'Help & Support', 'FAQ and contact', panelPath: '/panels/help'),
             ],
           ),
         ),
@@ -182,11 +187,11 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuItem(BuildContext context, IconData icon, String title, String subtitle, String panelPath) {
+  Widget _buildMenuItem(BuildContext context, IconData icon, String title, String subtitle, {String? panelPath, VoidCallback? onTap}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: GestureDetector(
-        onTap: () => WebPanelLauncher.open(context, panelPath),
+        onTap: onTap ?? (panelPath != null ? () => WebPanelLauncher.open(context, panelPath) : null),
         child: GlassContainer(
         padding: const EdgeInsets.all(16),
         borderRadius: 16,

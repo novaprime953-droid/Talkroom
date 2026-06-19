@@ -39,3 +39,8 @@ flutter:
     - assets/lottie/farm_sign_tips/
     - assets/lottie/soundeffect/
     - assets/svga/
+    - assets/svga/entries/
+    - assets/svga/gifts/
+    - assets/svga/gifts/lucky/
+    - assets/svga/gifts/super/
+    - assets/svga/room_animations/
